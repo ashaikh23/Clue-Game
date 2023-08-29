@@ -1,54 +1,62 @@
-Project 1 Clue Text Adventure Game Eyssa Benhida, Aymaan Shaikh
+# Project 1 - Clue Text Adventure Game by Aymaan Shaikh
 
-The objective of the game is to find out where the murder took place, with what item, and of course, who did it.
+Welcome to the Clue Text Adventure Game. The objective of this game is to unravel the mystery by discovering where the murder took place, identifying the murder weapon, and uncovering the culprit.
 
-Compilation:
-Type out: gcc -o cluegame adventure.c characters.c characters.h items.c items.h player.c player.h rooms.c rooms.h
+## Compilation
 
-then type: ./cluegame
+To compile and run the game, follow these steps in your terminal:
 
-To compile the code you need all files adventure.c, characters.c, characters.h, items.c, items.h, player.c, player.h, room.c, room.h and, the main function is located in adventure.c 
+1. Open your terminal.
+2. Type the following command to compile the source code:
+   ```
+   gcc -o cluegame adventure.c characters.c characters.h items.c items.h player.c player.h rooms.c rooms.h
+   ```
+3. Once compiled, execute the game by typing:
+   ```
+   ./cluegame
+   ```
 
-rooms.c, rooms.h - the source and header file implementing data structures and functions for rooms.
-items.c, items.h - the source and header file implementing data structures and functions for items.
-adventure.c - the source file with functions to read user input and interpret commands as well as the main function.
-characters.c, characters.h – the source and header file implementing data structures and functions for characters.
-player.c, player.h – the source and header file implementing data structures and functions for player.
+## Game Components
 
-Overview of game board structure:
+This game is built upon several source files, each with specific functionalities:
 
-Pointers:
-The game was built using 3 sets of linked lists (Characters, Items, Rooms) which were dynamically allocated into memory
-    
-Each room has its own linked list (itemList, charList) for inventory and the player has its own linked list(itemList) for inventory.
+- `adventure.c`: Contains the main function, as well as functions to read user input and interpret commands.
+- `characters.c` and `characters.h`: Implement data structures and functions related to characters in the game.
+- `items.c` and `items.h`: Define data structures and functions for handling items within the game.
+- `player.c` and `player.h`: Manage the player's data structures and related functions.
+- `rooms.c` and `rooms.h`: Implement data structures and functions for rooms and their connections.
 
-We use a struct Room with the directions that the rooms have NESW
+## Game Structure
 
-Each of the items were dynamically allocated memory using malloc and freed using free
+The game employs a linked-list structure to dynamically allocate memory for different components. It consists of three main types of linked lists: Characters, Items, and Rooms. Each room has its own linked lists for items and characters, while the player maintains an inventory using a linked list of items.
 
-Building the game map:
-To design the game board, we statically linked each room using the 4 pointers (east, west, north, south). Then we populated the rooms randomly using the rand() function, based on time using pointers to individual items and characters from the main character/item linked lists. 
-Simply put, each room contains its own set of Items, and Characters which is effectively an inventory of characters and items in each room, which could be used to add/remove characters/items when needed during gameplay through commands such as take/put/etc.… made by the player.
+Rooms are interconnected through directional pointers (north, east, south, west), forming a navigable game map. The items and characters are populated randomly within rooms using pointers to individual items and characters from the main linked lists.
 
-Managing User Input:
+## Managing User Input
 
-We get the user input, by using the C library function char *gets(char *str), which reads a line from stdin and places it into the string pointed to by the string. It will stop when either the newline char is read or when the end-of-document is reached. In various functions within the code, we used a case-sensitive while loop to ask the user for valid user input or to keep prompting the user for a value that could be used in the game.
+User input is managed using the `gets()` function, which reads input from the user and processes it. The game prompts the user for valid inputs and uses functions like `strncmp` and `strcmp` to validate and interpret commands.
 
-When comparing strings, we used the C library function strncmp to compare the first n bytes of the first and second strings, and we also used strcmp, which compares two strings character by character. If the strings are equal then the function returns the value 0, if it's>0 then the ASCII is greater in string one, or if it's lower then it's <0.
+## Game Functionality
 
-Simply put, the game is played by typing in user input and typing commands as well as re-typing if it is incorrect.
+The game boasts the following features:
 
-Functionality:
-1.	The game has 9 rooms including the starting room which is connected via pointers.
-2.	The game randomly initializes the location of each room in the game board before the game starts using shuffleRoomIndexes() and we use rand() to 
-3.	The game has at least 6 items *itemNames[6] and 5 characters *characterNames[5], other than the player's avatar and each room contains at most one item at the beginning
-4.	The game randomly picks a room, an item, and a character as the answer.
-5.	The game allows each room to have a linkedList of items
-6.	The game implements an avatar where the avatar has an inventory (a linkedList of items as player-> itemList
-7.	The game implements a table of commands: help, list, look, go, take, drop, inventory, clue; for each of the functionality of the function’s players can use the command and re-type if they have spelled it incorrectly or making it an invalid input.
-8.	The game also included a winning and losing state (if they have 10 guesses)
+1. Nine interconnected rooms, including a starting room, creating a navigable game map.
+2. Randomized room placements using the `shuffleRoomIndexes()` function.
+3. A variety of items and characters, with rooms initially containing at most one item each.
+4. Randomly chosen murder scenario: room, item, and character.
+5. Inventory management for rooms and the player's avatar.
+6. A set of commands for players, including help, list, look, go, take, drop, inventory, and clue.
+7. Error handling for incorrect inputs, prompting users to re-enter commands.
+8. Winning and losing conditions based on player guesses.
 
+## Extra Features
 
-Extra:
-We have included an easter egg which can be found
-We also have a blood radius if its next to the murder room, as well as a value if it is the Murder room, close to it, or if it’s not.
+The game includes additional features:
+
+- An easter egg for players to discover.
+- A blood radius indicating proximity to the murder room.
+- Visual indicators for the murder room's proximity.
+
+**Note:** The game includes a total of 9 rooms, 6 items, and 5 characters. Players can use the provided commands to interact with the game world and uncover the truth.
+
+Feel free to explore the game, solve the mystery, and enjoy the adventure!
